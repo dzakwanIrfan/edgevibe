@@ -1,7 +1,5 @@
 # EdgeVibe: Break the Frame
 
-![EdgeVibe Logo](https://via.placeholder.com/150) <!-- Ganti dengan logo jika ada -->
-
 **Unleash Your Edge**  
 Twist, shift, and filter your way to epic visuals that bend reality and redefine creativity with every pixel you touch. EdgeVibe is a bold, web-based image processing tool built with React and Vite, delivering gritty geometric operations and kernel-based filters right in your browser.
 
