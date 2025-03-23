@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FilterButton from "./FilterButton";
 
 function FilterControls({ setSelectedFilter, isLoading, setIsLoading }) {
   const [activeFilter, setActiveFilter] = useState('none');
@@ -19,7 +20,42 @@ function FilterControls({ setSelectedFilter, isLoading, setIsLoading }) {
       [1/9, 1/9, 1/9],
       [1/9, 1/9, 1/9],
       [1/9, 1/9, 1/9]
-    ]
+    ],
+    gaussianBlur: [
+      [1/16,  2/16,  1/16],
+      [2/16,  4/16,  2/16],
+      [1/16,  2/16,  1/16]
+    ],
+    sharpen: [
+      [0, -1, 0],
+      [-1, 5, -1],
+      [0, -1, 0]
+    ],  
+    sobelHorizontal: [
+      [-1, 0,   1],
+      [-2, 0,   2],
+      [-1, 0,   1]
+    ],
+    sobelVertical: [
+      [-1, -2, -1],
+      [ 0, 0, 0],
+      [ 1, 2, 1]
+    ],
+    laplacian: [
+      [0, -1, 0],
+      [-1, 4, -1],
+      [0, -1, 0]
+    ],
+    prewittHorizontal: [
+      [-1, 0, 1],
+      [-1, 0, 1],
+      [-1, 0, 1]
+    ],
+    prewittVertical: [
+      [1, 1, 1],
+      [0, 0, 0],
+      [-1, -1, -1]
+    ],
   };
 
   const handleFilterClick = (filterKey) => {
@@ -32,26 +68,86 @@ function FilterControls({ setSelectedFilter, isLoading, setIsLoading }) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-      <h3 className="text-xl font-bold text-gray-900 mb-4">Filter Magic</h3>
-      <div className="flex flex-wrap gap-3">
-        {Object.keys(filters).map((filterKey) => (
-          <button
-            key={filterKey}
-            onClick={() => handleFilterClick(filterKey)}
-            disabled={isLoading}
-            className={`relative px-6 py-3 text-base font-semibold rounded-md transition-all duration-200 ${
-              isLoading
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : activeFilter === filterKey
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-900 hover:bg-blue-600 hover:text-white'
-            }`}
-          >
-            {isLoading && activeFilter === filterKey ? 'Processing...' : filterKey === 'none' ? 'No Filter' : filterKey.charAt(0).toUpperCase() + filterKey.slice(1)}
-            {activeFilter === filterKey && !isLoading}
-          </button>
-        ))}
+    <div className="bg-white p-4 rounded-lg shadow">
+      <h3 className="text-lg font-semibold mb-2">Filters</h3>
+      <div className="flex flex-wrap gap-2">
+        <FilterButton
+          filterKey="none"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="No Filter"
+        />
+        <FilterButton
+          filterKey="emboss"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Emboss"
+        />
+        <FilterButton
+          filterKey="highPass"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="High Pass"
+        />
+        <FilterButton
+          filterKey="lowPass"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Low Pass"
+        />
+        <FilterButton
+          filterKey="gaussianBlur"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Gaussian Blur"
+        />
+        <FilterButton
+          filterKey="sharpen"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Sharpen"
+        />
+        <FilterButton
+          filterKey="sobelHorizontal"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Sobel Horizontal"
+        />
+        <FilterButton
+          filterKey="sobelVertical"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Sobel Vertical"
+        />
+        <FilterButton
+          filterKey="laplacian"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Laplacian"
+        />
+        <FilterButton
+          filterKey="prewittHorizontal"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Prewitt Horizontal"
+        />
+        <FilterButton
+          filterKey="prewittVertical"
+          activeFilter={activeFilter}
+          isLoading={isLoading}
+          onClick={handleFilterClick}
+          label="Prewitt Vertical"
+        />
       </div>
     </div>
   );
